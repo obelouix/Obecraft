@@ -14,7 +14,12 @@ public class ItemModels extends ItemModelProvider {
     @Override
     protected void registerModels() {
         withExistingParent(BlockRegistry.SILVER_ORE.get().getRegistryName().getPath(), modLoc("block/silver_ore"));
-        withExistingParent(ItemRegistry.RAW_SILVER.get().getRegistryName().getPath(), modLoc("item/raw_silver"));
-        withExistingParent(ItemRegistry.SILVER_INGOT.get().getRegistryName().getPath(), modLoc("item/silver_ingot"));
+        registerSingleTexture(ItemRegistry.RAW_SILVER.get().getRegistryName().getPath(), "item/raw_silver");
+        registerSingleTexture(ItemRegistry.SILVER_INGOT.get().getRegistryName().getPath(), "item/silver_ingot");
     }
+
+    private void registerSingleTexture(String name, String textureLocation) {
+        singleTexture(name, mcLoc("item/generated"), "layer0", modLoc(textureLocation));
+    }
+
 }
