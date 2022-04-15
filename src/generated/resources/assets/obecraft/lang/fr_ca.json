@@ -1,5 +1,7 @@
 {
   "block.obecraft.silver_ore": "Minerai d'argent",
+  "item.obecraft.raw_silver": "Argent brut",
+  "item.obecraft.silver_ingot": "Lingot d'argent",
   "itemGroup.obecraft_blocks": "blocs d'Obecraft",
   "itemGroup.obecraft_items": "Items d'Obecraft"
 }

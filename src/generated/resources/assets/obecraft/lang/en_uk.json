@@ -1,5 +1,7 @@
 {
   "block.obecraft.silver_ore": "Silver ore",
+  "item.obecraft.raw_silver": "Raw silver",
+  "item.obecraft.silver_ingot": "Silver ingot",
   "itemGroup.obecraft_blocks": "Obecraft blocks",
   "itemGroup.obecraft_items": "Obecraft items"
 }
