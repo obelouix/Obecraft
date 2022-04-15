@@ -1,18 +1,18 @@
 package fr.obelouix.obecraft.datagen;
 
 import fr.obelouix.obecraft.registry.BlockRegistry;
+import fr.obelouix.obecraft.registry.ItemRegistry;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
-import net.minecraft.data.loot.LootTableProvider;
 
-public class LootTables extends BaseLootTableProvider  {
+public class LootTables extends BaseLootTableProvider {
     public LootTables(DataGenerator generator) {
         super(generator);
     }
 
     @Override
     protected void addTables() {
-        createSilkTouchTable("silver_ore", BlockRegistry.SILVER_ORE.get(), BlockRegistry.SILVER_ORE.get().asItem(), 1, 3);
+        lootTables.put(BlockRegistry.SILVER_ORE.get(),
+                createSilkTouchTable("silver_ore_silktouch", BlockRegistry.SILVER_ORE.get(), ItemRegistry.RAW_SILVER.get(), 1, 4));
     }
 
 }
