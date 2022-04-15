@@ -27,11 +27,6 @@ public class BlockRegistry {
 
     public static final RegistryObject<Block> SILVER_ORE = register("silver_ore", () -> new Block(BlockBehaviour.Properties.of(Material.BARRIER)), CreativeTabs.OBECRAFT_BLOCKS);
 
-    public BlockRegistry(IEventBus iEventBus) {
-        BLOCKS.register(iEventBus);
-        ITEMS.register(iEventBus);
-    }
-
     @SubscribeEvent
     public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
         // register a new block here
@@ -48,6 +43,11 @@ public class BlockRegistry {
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab) {
         return ITEMS.register(name, () -> new BlockItem(block.get(),
                 new Item.Properties().tab(tab)));
+    }
+
+    public static void registerBus(IEventBus iEventBus){
+        BLOCKS.register(iEventBus);
+        ITEMS.register(iEventBus);
     }
 
 }

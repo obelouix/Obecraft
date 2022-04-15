@@ -1,11 +1,12 @@
 package fr.obelouix.obecraft;
 
+import fr.obelouix.obecraft.registry.BaseRegistry;
 import fr.obelouix.obecraft.registry.BlockRegistry;
 import fr.obelouix.obecraft.registry.ItemRegistry;
-import net.minecraft.world.level.block.Block;
+import fr.obelouix.obecraft.world.gen.OreGenerator;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -17,7 +18,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -37,9 +37,11 @@ public class Obecraft {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        IEventBus bus = MinecraftForge.EVENT_BUS;
 
-        new BlockRegistry(FMLJavaModLoadingContext.get().getModEventBus());
-        new ItemRegistry(FMLJavaModLoadingContext.get().getModEventBus());
+        bus.addListener(BlockRegistry::registerBus);
+        bus.addListener(ItemRegistry::registerBus);
+        bus.addListener(OreGenerator::onBiomeLoadingEvent);
 
     }
 
@@ -47,6 +49,7 @@ public class Obecraft {
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+        event.enqueueWork(OreGenerator::registerConfiguredFeatures);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {

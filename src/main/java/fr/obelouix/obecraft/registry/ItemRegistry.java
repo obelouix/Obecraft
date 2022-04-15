@@ -9,7 +9,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ObjectHolder;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
@@ -23,10 +22,6 @@ public class ItemRegistry {
     public static final RegistryObject<Item> rawSilver = register("raw_silver", () -> new Item(new Item.Properties().tab(CreativeTabs.OBECRAFT_ITEMS)));
 
 
-    public ItemRegistry(IEventBus iEventBus) {
-        ITEMS.register(iEventBus);
-    }
-
     @SubscribeEvent
     public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent) {
         // register a new block here
@@ -37,4 +32,7 @@ public class ItemRegistry {
        return ITEMS.register(name, supplier);
     }
 
+    public static void registerBus(IEventBus modEventBus) {
+        ITEMS.register(modEventBus);
+    }
 }
