@@ -37,11 +37,13 @@ public class Obecraft {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
-        IEventBus bus = MinecraftForge.EVENT_BUS;
 
-        bus.addListener(BlockRegistry::registerBus);
-        bus.addListener(ItemRegistry::registerBus);
+        BlockRegistry.registerBus(FMLJavaModLoadingContext.get().getModEventBus());
+        ItemRegistry.registerBus(FMLJavaModLoadingContext.get().getModEventBus());
+
+        IEventBus bus = MinecraftForge.EVENT_BUS;
         bus.addListener(OreGenerator::onBiomeLoadingEvent);
+
 
     }
 
