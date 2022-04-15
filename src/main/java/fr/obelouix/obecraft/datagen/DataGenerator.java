@@ -4,6 +4,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
+import java.util.List;
+
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerator {
 
@@ -20,10 +22,8 @@ public class DataGenerator {
         if (event.includeClient()) {
             generator.addProvider(new BlockStates(generator, event.getExistingFileHelper()));
             generator.addProvider(new ItemModels(generator, event.getExistingFileHelper()));
-            generator.addProvider(new LanguageProvider(generator, "en_us"));
-            generator.addProvider(new LanguageProvider(generator, "en_uk"));
-            generator.addProvider(new LanguageProvider(generator, "fr_fr"));
-            generator.addProvider(new LanguageProvider(generator, "fr_ca"));
+            List.of("en_us", "en_uk", "fr_fr", "fr_ca")
+                    .forEach(s -> generator.addProvider(new LanguageProvider(generator, s)));
         }
     }
 
