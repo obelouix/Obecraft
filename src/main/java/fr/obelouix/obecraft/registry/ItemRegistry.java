@@ -18,7 +18,7 @@ public class ItemRegistry {
 
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "obecraft");
 
-    public static final RegistryObject<Item> silverIngot = register("silver_ingot", () -> new Item(new Item.Properties().tab(CreativeTabs.OBECRAFT_ITEMS)));
+    public static final RegistryObject<Item> SILVER_INGOT = register("silver_ingot", () -> new Item(new Item.Properties().tab(CreativeTabs.OBECRAFT_ITEMS)));
     public static final RegistryObject<Item> RAW_SILVER = register("raw_silver", () -> new Item(new Item.Properties().tab(CreativeTabs.OBECRAFT_ITEMS)));
 
 
