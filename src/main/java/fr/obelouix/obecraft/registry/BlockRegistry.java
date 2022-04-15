@@ -25,7 +25,9 @@ public class BlockRegistry {
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, "obecraft");
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "obecraft");
 
-    public static final RegistryObject<Block> SILVER_ORE = register("silver_ore", () -> new Block(BlockBehaviour.Properties.of(Material.BARRIER)), CreativeTabs.OBECRAFT_BLOCKS);
+    private static final BlockBehaviour.Properties DEFAULT_ORE_PROPERTIES = BlockBehaviour.Properties.of(Material.STONE).strength(2f).requiresCorrectToolForDrops();
+
+    public static final RegistryObject<Block> SILVER_ORE = register("silver_ore", () -> new Block(DEFAULT_ORE_PROPERTIES), CreativeTabs.OBECRAFT_BLOCKS);
 
     @SubscribeEvent
     public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
