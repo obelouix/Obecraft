@@ -14,7 +14,7 @@ buildscript {
         classpath("net.minecraftforge.gradle:ForgeGradle:5.1.+") {
                 isChanging = true
         }
-        classpath("org.spongepowered:mixingradle:0.7-SNAPSHOT")
+        classpath("org.spongepowered:mixingradle:0.7.32")
     }
 }
 
