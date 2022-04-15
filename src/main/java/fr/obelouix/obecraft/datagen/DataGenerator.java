@@ -21,6 +21,7 @@ public class DataGenerator {
             generator.addProvider(new BlockStates(generator, event.getExistingFileHelper()));
             generator.addProvider(new ItemModels(generator, event.getExistingFileHelper()));
             generator.addProvider(new LanguageProvider(generator, "en_us"));
+            generator.addProvider(new LanguageProvider(generator, "en_uk"));
             generator.addProvider(new LanguageProvider(generator, "fr_fr"));
             generator.addProvider(new LanguageProvider(generator, "fr_ca"));
         }
