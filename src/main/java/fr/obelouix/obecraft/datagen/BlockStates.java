@@ -5,6 +5,8 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import java.util.List;
+
 public class BlockStates extends BlockStateProvider {
     public BlockStates(DataGenerator generator, ExistingFileHelper existingFileHelper) {
         super(generator, "obecraft", existingFileHelper);
@@ -12,6 +14,8 @@ public class BlockStates extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        simpleBlock(BlockRegistry.SILVER_ORE.get());
+        List.of(BlockRegistry.SILVER_ORE.get(),
+                BlockRegistry.DEEPSLATE_SILVER_ORE.get()
+        ).forEach(this::simpleBlock);
     }
 }

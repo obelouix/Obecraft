@@ -13,6 +13,9 @@ public class LootTables extends BaseLootTableProvider {
     protected void addTables() {
         lootTables.put(BlockRegistry.SILVER_ORE.get(),
                 createSilkTouchTable("silver_ore_silktouch", BlockRegistry.SILVER_ORE.get(), ItemRegistry.RAW_SILVER.get(), 1, 4));
+
+        lootTables.put(BlockRegistry.DEEPSLATE_SILVER_ORE.get(),
+                createSilkTouchTable("deepslate_silver_ore_silktouch", BlockRegistry.DEEPSLATE_SILVER_ORE.get(), ItemRegistry.RAW_SILVER.get(), 1, 4));
     }
 
 }

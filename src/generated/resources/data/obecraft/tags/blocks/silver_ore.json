@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "obecraft:silver_ore"
+    "obecraft:silver_ore",
+    "obecraft:deepslate_silver_ore"
   ]
 }

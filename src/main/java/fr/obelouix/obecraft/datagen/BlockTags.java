@@ -13,14 +13,19 @@ public class BlockTags extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
+
         tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(BlockRegistry.SILVER_ORE.get());
+                .add(BlockRegistry.SILVER_ORE.get())
+                .add(BlockRegistry.DEEPSLATE_SILVER_ORE.get());
 
         tag(net.minecraft.tags.BlockTags.NEEDS_IRON_TOOL)
-                .add(BlockRegistry.SILVER_ORE.get());
+                .add(BlockRegistry.SILVER_ORE.get())
+                .add(BlockRegistry.DEEPSLATE_SILVER_ORE.get());
 
         tag(TagsRegistry.SILVER_ORE)
-                .add(BlockRegistry.SILVER_ORE.get());
+                .add(BlockRegistry.SILVER_ORE.get())
+                .add(BlockRegistry.DEEPSLATE_SILVER_ORE.get());
+
     }
 
     @Override

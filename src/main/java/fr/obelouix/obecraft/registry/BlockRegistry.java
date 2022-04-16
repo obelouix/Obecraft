@@ -28,6 +28,7 @@ public class BlockRegistry {
     private static final BlockBehaviour.Properties DEFAULT_ORE_PROPERTIES = BlockBehaviour.Properties.of(Material.STONE).strength(2f).requiresCorrectToolForDrops();
 
     public static final RegistryObject<Block> SILVER_ORE = register("silver_ore", () -> new Block(DEFAULT_ORE_PROPERTIES), CreativeTabs.OBECRAFT_BLOCKS);
+    public static final RegistryObject<Block> DEEPSLATE_SILVER_ORE = register("deepslate_silver_ore", () -> new Block(DEFAULT_ORE_PROPERTIES), CreativeTabs.OBECRAFT_BLOCKS);
 
     @SubscribeEvent
     public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {

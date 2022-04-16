@@ -22,6 +22,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
                 add("itemGroup." + "obecraft_blocks", "blocs d'Obecraft");
                 add("itemGroup." + "obecraft_items", "Items d'Obecraft");
                 add(BlockRegistry.SILVER_ORE.get(), "Minerai d'argent");
+                add(BlockRegistry.DEEPSLATE_SILVER_ORE.get(), "Minerai d'argent des abîmes");
                 add(ItemRegistry.RAW_SILVER.get(), "Argent brut");
                 add(ItemRegistry.SILVER_INGOT.get(), "Lingot d'argent");
             }
@@ -29,6 +30,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
                 add("itemGroup." + "obecraft_blocks", "Obecraft blocks");
                 add("itemGroup." + "obecraft_items", "Obecraft items");
                 add(BlockRegistry.SILVER_ORE.get(), "Silver ore");
+                add(BlockRegistry.DEEPSLATE_SILVER_ORE.get(), "Deepslate silver ore");
                 add(ItemRegistry.RAW_SILVER.get(), "Raw silver");
                 add(ItemRegistry.SILVER_INGOT.get(), "Silver ingot");
             }
