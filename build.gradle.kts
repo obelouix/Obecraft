@@ -8,11 +8,15 @@ buildscript {
     repositories {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
         maven("https://maven.minecraftforge.net")
+        maven ("https://maven.parchmentmc.org")
         maven("https://repo.spongepowered.org/repository/maven-public/")
         mavenCentral()
     }
     dependencies {
         classpath("net.minecraftforge.gradle:ForgeGradle:5.1.+") {
+            isChanging = true
+        }
+        classpath("org.parchmentmc:librarian:1.+") {
             isChanging = true
         }
         classpath("org.spongepowered:mixingradle:0.7.32")
@@ -25,7 +29,8 @@ plugins {
 
 apply {
     plugin("net.minecraftforge.gradle")
-    plugin( "org.spongepowered.mixin")
+    plugin("org.parchmentmc.librarian.forgegradle")
+    plugin("org.spongepowered.mixin")
 }
 
 group = "fr.obelouix"
@@ -42,7 +47,7 @@ configure<UserDevExtension> {
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not always work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings("official",  "1.18.2")
+    mappings("parchment", "2022.03.13-1.18.2")
     //mappings = mappingVersion
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
