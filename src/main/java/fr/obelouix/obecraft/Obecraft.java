@@ -42,8 +42,6 @@ public class Obecraft {
 
         IEventBus bus = MinecraftForge.EVENT_BUS;
         bus.addListener(OreGenerator::onBiomeLoadingEvent);
-
-
     }
 
     private void setup(final FMLCommonSetupEvent event) {
