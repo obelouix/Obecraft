@@ -185,9 +185,9 @@ dependencies {
     val jei_version: String by properties
 
     // compile against the JEI API but do not include it at runtime
-    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
+    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api"))
     // at runtime, use the full JEI jar
-    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
+    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}"))
 
     runtimeOnly(fg.deobf("curse.maven:the-one-probe-245211:3665852"))
     runtimeOnly(fg.deobf("curse.maven:configured-457570:3721946"))
