@@ -1,8 +1,12 @@
 package fr.obelouix.obecraft;
 
+import fr.obelouix.obecraft.client.screen.IronGeneratorScreen;
 import fr.obelouix.obecraft.registry.BlockRegistry;
 import fr.obelouix.obecraft.registry.ItemRegistry;
 import fr.obelouix.obecraft.world.gen.OreGenerator;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -10,6 +14,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -28,7 +33,8 @@ public class Obecraft {
 
     public Obecraft() {
         // Register the setup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         // Register the enqueueIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         // Register the processIMC method for modloading
@@ -44,16 +50,23 @@ public class Obecraft {
         bus.addListener(OreGenerator::onBiomeLoadingEvent);
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
+    private void commonSetup(final FMLCommonSetupEvent event) {
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
         event.enqueueWork(OreGenerator::registerConfiguredFeatures);
     }
 
+    public void clientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            MenuScreens.register(BlockRegistry.IRON_GENERATOR_CONTAINER.get(), IronGeneratorScreen::new);           // Attach our container to the screen
+            ItemBlockRenderTypes.setRenderLayer(BlockRegistry.IRON_GENERATOR.get(), RenderType.translucent()); // Set the render type for our power generator to translucent
+        });
+    }
+
     private void enqueueIMC(final InterModEnqueueEvent event) {
         // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("Obecraft", "helloworld", () -> {
+        InterModComms.sendTo("obecraft", "helloworld", () -> {
             LOGGER.info("Hello world from the MDK");
             return "Hello world";
         });

@@ -37,7 +37,7 @@ public class BlockRegistry {
     public static final RegistryObject<Block> SILVER_ORE = register("silver_ore", () -> new Block(DEFAULT_ORE_PROPERTIES), CreativeTabs.OBECRAFT_BLOCKS);
     public static final RegistryObject<Block> DEEPSLATE_SILVER_ORE = register("deepslate_silver_ore", () -> new Block(DEFAULT_ORE_PROPERTIES), CreativeTabs.OBECRAFT_BLOCKS);
 
-    public static final RegistryObject<IronGeneratorBlock> IRON_GENERATOR = BLOCKS.register("iron_generator", IronGeneratorBlock::new);
+    public static final RegistryObject<IronGeneratorBlock> IRON_GENERATOR = register("iron_generator", IronGeneratorBlock::new, CreativeTabs.OBECRAFT_BLOCKS);
     public static final RegistryObject<BlockEntityType<IronGeneratorBlockEntity>> IRON_GENERATOR_BE = BLOCK_ENTITIES.register("iron_generator", () -> BlockEntityType.Builder.of(IronGeneratorBlockEntity::new, IRON_GENERATOR.get()).build(null));
 
     public static final RegistryObject<MenuType<IronGeneratorContainer>> IRON_GENERATOR_CONTAINER = CONTAINERS.register("powergen",

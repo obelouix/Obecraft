@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class IronGeneratorBlockEntity extends BlockEntity {
-    private static final int MAX_CAPACITY = 6000; // Max capacity;
+    public static final int MAX_CAPACITY = 24000; // Max capacity;
     public static final int IRON_GENERATOR_SEND = 250;       // Power to send out per tick
     public static final int IRON_GENERATOR_GENERATE = 50;    // Generation per tick
 
@@ -49,18 +49,20 @@ public class IronGeneratorBlockEntity extends BlockEntity {
     }
 
     public void tickServer() {
+
+        ItemStack stack = itemHandler.getStackInSlot(0);
+        int burnTime = ForgeHooks.getBurnTime(stack, RecipeType.SMELTING);
+
         if (counter > 0) {
-            energyStorage.addEnergy(IRON_GENERATOR_GENERATE);
+            energyStorage.addEnergy(burnTime / (IRON_GENERATOR_GENERATE * 12));
             counter--;
             setChanged();
         }
 
         if (counter <= 0) {
-            ItemStack stack = itemHandler.getStackInSlot(0);
-            int burnTime = ForgeHooks.getBurnTime(stack, RecipeType.SMELTING);
             if (burnTime > 0) {
                 itemHandler.extractItem(0, 1, false);
-                counter = burnTime;
+                counter = burnTime / 12;
                 setChanged();
             }
         }
@@ -70,6 +72,7 @@ public class IronGeneratorBlockEntity extends BlockEntity {
             level.setBlock(worldPosition, blockState.setValue(BlockStateProperties.POWERED, counter > 0),
                     Block.UPDATE_ALL);
         }
+
 
         sendOutPower();
     }
