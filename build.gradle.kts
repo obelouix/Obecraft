@@ -47,7 +47,7 @@ configure<UserDevExtension> {
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not always work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings("parchment", "2022.03.13-1.18.2")
+    mappings("parchment", "2022.12.18-1.19.3")
     //mappings = mappingVersion
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
@@ -163,7 +163,7 @@ dependencies {
     // Specify the version of Minecraft to use. If this is any group other than "net.minecraft" it is assumed
     // that the dep is a ForgeGradle "patcher" dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    "minecraft"("net.minecraftforge:forge:1.19-41.0.16")
+    "minecraft"("net.minecraftforge:forge:1.19.3-44.1.8")
 
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
@@ -185,12 +185,12 @@ dependencies {
     val jei_version: String by properties
 
     // compile against the JEI API but do not include it at runtime
-    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api"))
+    //compileOnly(fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api"))
     // at runtime, use the full JEI jar
-    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}"))
+    //runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}"))
 
-    runtimeOnly(fg.deobf("curse.maven:the-one-probe-245211:3665852"))
-    runtimeOnly(fg.deobf("curse.maven:configured-457570:3721946"))
+    //runtimeOnly(fg.deobf("curse.maven:the-one-probe-245211:3665852"))
+    //runtimeOnly(fg.deobf("curse.maven:configured-457570:3721946"))
 
     fileTree("mods").also { it.include("*.jar") }.forEach {
         val match = "^(?<B>(?<A>[^-]*)(?:-[0-9.]*)?)-(?<C>.*)$".toPattern().toRegex().find(it.nameWithoutExtension)
