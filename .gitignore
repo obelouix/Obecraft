@@ -119,3 +119,5 @@ run/
 
 # generated files from runData task that are from Minecraft
 src/generated/resources/data/minecraft/
+bin/
+.

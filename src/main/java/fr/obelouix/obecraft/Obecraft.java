@@ -1,12 +1,11 @@
 package fr.obelouix.obecraft;
 
-import fr.obelouix.obecraft.client.screen.IronGeneratorScreen;
-import fr.obelouix.obecraft.registry.BlockRegistry;
-import fr.obelouix.obecraft.registry.ItemRegistry;
-import fr.obelouix.obecraft.world.gen.OreGenerator;
-import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
+import java.util.stream.Collectors;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import fr.obelouix.obecraft.creativetab.CreativeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -19,19 +18,21 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("obecraft")
-public class Obecraft {
+public class Obecraft implements ObecraftBase {
 
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
-
+    public static Obecraft instance;
+    private  IEventBus bus;
     public Obecraft() {
+
+        if(instance == null){
+            instance = this;
+        }
+
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
@@ -43,25 +44,26 @@ public class Obecraft {
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
-        BlockRegistry.registerBus(FMLJavaModLoadingContext.get().getModEventBus());
-        ItemRegistry.registerBus(FMLJavaModLoadingContext.get().getModEventBus());
+        //BlockRegistry.registerBus(FMLJavaModLoadingContext.get().getModEventBus());
+        //ItemRegistry.registerBus(FMLJavaModLoadingContext.get().getModEventBus());
 
-        IEventBus bus = MinecraftForge.EVENT_BUS;
-        bus.addListener(OreGenerator::onBiomeLoadingEvent);
+       bus = MinecraftForge.EVENT_BUS;
+        // bus.addListener(OreGenerator::onBiomeLoadingEvent);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-        event.enqueueWork(OreGenerator::registerConfiguredFeatures);
+        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getDescriptionId());
+        //event.enqueueWork(OreGenerator::registerConfiguredFeatures);
     }
 
     public void clientSetup(FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
+        CreativeTabs.init(bus);;
+        /*event.enqueueWork(() -> {
             MenuScreens.register(BlockRegistry.IRON_GENERATOR_CONTAINER.get(), IronGeneratorScreen::new);           // Attach our container to the screen
             ItemBlockRenderTypes.setRenderLayer(BlockRegistry.IRON_GENERATOR.get(), RenderType.translucent()); // Set the render type for our power generator to translucent
-        });
+        });*/
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
